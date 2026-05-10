@@ -24,15 +24,19 @@ not_spam_sentences = [
     "Happy birthday! Hope you have a wonderful day celebrating."
 ]
 
+#Data Labeling
 documents = spam_sentences + not_spam_sentences
 labels = [1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0]
 
+#Feature Extraction (Vectorization) convert human language into a grid of numbers (math) that the computer can actually process.
 from sklearn.feature_extraction.text import TfidfVectorizer
 tfidf = TfidfVectorizer(lowercase=True,stop_words='english',ngram_range=(1,2))
 X = tfidf.fit_transform(documents)
 
 #print(tfidf.get_feature_names_out())
 print(X.toarray())
+
+#Model Training:feed those numbers and labels into a Logistic Regression algorithm to help it learn the patterns of spammy words.
 
 from sklearn.linear_model import LogisticRegression
 model = LogisticRegression()
